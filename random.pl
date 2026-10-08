@@ -5,15 +5,15 @@ use warnings;
 
 use Time::HiRes;
 
-state $SEED = get_time();
+state $SEED = shuffle_seed();
 
 
-sub get_time {
-	return join '.', Time::HiRes::gettimeofday;
+sub shuffle_seed {
+	return (join '.', Time::HiRes::gettimeofday) . $$;
 }
 
 sub secure_srand {
-	$SEED = shift // get_time();
+	$SEED = shift // shuffle_seed();
 }
 
 
