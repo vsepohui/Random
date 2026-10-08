@@ -5,7 +5,7 @@ use warnings;
 
 require './random.pl';
 
-for (1..100) {
+for (1..10000000) {
 	say secure_rand();
 }
 

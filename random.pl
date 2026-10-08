@@ -13,7 +13,6 @@ sub get_time {
 
 sub secure_srand {
 	$SEED = shift // get_time();
-	warn $SEED;
 }
 
 
