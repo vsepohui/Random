@@ -29,7 +29,7 @@ sub secure_rand {
 	$r = $r * substr($s, -5, -1);
 	$r = substr($r, 0, 22);
 	$r =~ s/\.//;
-	$r = int $r;
+	#$r = $r;
 	$r = '0.'.$r;
 	
 	return $num ? int $num * $r : $r;
