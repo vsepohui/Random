@@ -17,10 +17,13 @@ sub secure_srand {
 }
 
 sub secure_rand {
+	my $num = shift;
+	
 	my $r = (sin($SEED) + 1) / 2;
 	$SEED *= $r+0.8;
 	$SEED /= 101 if ($SEED >= 10**22);
 	
+
 	my $s = $r;
 	$s =~ s/\.//;
 	$r = $r * substr($s, -5, -1);
@@ -29,7 +32,7 @@ sub secure_rand {
 	$r = int $r;
 	$r = '0.'.$r;
 	
-	return $r;
+	return $num ? int $num * $r : $r;
 }
 
 
