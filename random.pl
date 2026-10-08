@@ -31,10 +31,5 @@ sub secure_rand {
 	return $r;
 }
 
-for (1..100){
-	say secure_rand();
-}
-
-
 
 1;
