@@ -8,7 +8,7 @@ use Time::HiRes;
 state $SEED = get_time();
 
 sub get_time {
-	return join '', Time::HiRes::gettimeofday;
+	return join '.', Time::HiRes::gettimeofday;
 }
 
 sub secure_srand {
@@ -16,11 +16,31 @@ sub secure_srand {
 	warn $SEED;
 }
 
+
+sub harmonic {
+	my $t = shift;
+	
+	my $half_freq = 2/7.0;
+
+	my $j;
+	my $step = int ($t / $half_freq);
+
+	if (($step % 2) == 0) {
+		$j = 1;
+	} else {
+		$j = -1;
+	}
+	$t -= $step * $half_freq;
+	
+	return $j*sqrt (1 - $t*$t);
+}
+	
+
 sub secure_rand {
 	my $num = shift;
 	
-	my $r = (sin($SEED) + 1) / 2;
-	$SEED *= $r+0.8;
+	my $r = (harmonic($SEED)+1)/2.0;
+	$SEED *= $r+0.5;
 	$SEED /= 101 if ($SEED >= 10**22);
 	
 
