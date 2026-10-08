@@ -18,7 +18,8 @@ sub secure_srand {
 
 sub secure_rand {
 	my $r = (sin($SEED) + 1) / 2;
-	$SEED *= $r+0.5;
+	$SEED *= $r+0.8;
+	$SEED /= 101 if ($SEED >= 10**22);
 	
 	my $s = $r;
 	$s =~ s/\.//;
