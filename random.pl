@@ -8,8 +8,15 @@ use Time::HiRes;
 state $SEED = shuffle_seed();
 
 
+
 sub shuffle_seed {
-	return (join '.', Time::HiRes::gettimeofday) . $$;
+	my $n = (join '.', reverse Time::HiRes::gettimeofday) . $$;
+	
+	$n =~ s/\.//;
+	$n = substr($n, 0, -12);
+	$n = '0.'.$n;
+
+	return 1 / $n;
 }
 
 sub secure_srand {
